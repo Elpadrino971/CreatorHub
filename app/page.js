@@ -1,45 +1,26 @@
 'use client'
 
-import { useEffect } from "react";
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await fetch('/api/');
-      const data = await response.json();
-      console.log(data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
-
+export default function Home() {
+  const router = useRouter()
+  
   useEffect(() => {
-    helloWorldApi();
-  }, []);
+    // Redirect to dashboard
+    router.push('/dashboard')
+  }, [router])
 
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" alt="Emergent" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="animate-pulse flex flex-col items-center gap-4">
+        <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center">
+          <svg className="w-6 h-6 text-primary-foreground" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+          </svg>
+        </div>
+        <p className="text-muted-foreground">Chargement de CreatorHub...</p>
+      </div>
     </div>
-  );
-};
-
-function App() {
-  return (
-    <div className="App">
-      <Home />
-    </div>
-  );
+  )
 }
-
-export default App;
